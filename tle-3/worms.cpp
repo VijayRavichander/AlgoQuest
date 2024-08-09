@@ -1,4 +1,4 @@
-// https://cses.fi/problemset/task/1085
+// https://codeforces.com/contest/474/problem/B
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -50,43 +50,39 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
-bool f(vector<ll> nums, int k, ll mid){
-    ll divisions = 1;
-    ll sum = 0;
-    for(int i = 0; i < nums.size(); i++){
-        if(nums[i] > mid){
-            return false;
-        }else if(sum + nums[i] <= mid){
-            sum += nums[i];
-        }else{
-            sum = nums[i];
-            divisions++;
-        }
-    }
-
-    return divisions <= k;
-}
 
 void solve(){
-    ll n, k;
-    cin>>n>>k;
-    vector<ll> nums(n);
-    for(auto&it: nums) cin>>it;
-    
-    ll low = 0, high = 10e17;
-    ll mid, ans;
-    while(low <= high){
-        mid = (low + high) / 2;
-        if(f(nums, k, mid)){
-            ans = mid;
-            high = mid - 1;
-        }else{
-            low = mid + 1;
-        }
+    int n; cin>>n;
+    vector<int> worms(n); 
+    int sum = 0, it;
+    for(int i = 0; i < worms.size(); i++){
+        cin>>it;
+        sum += it;
+        worms[i] = sum;
     }
 
-    cout<<ans<<endl;
-    
+    int j; cin>>j;
+    vector<int> jw(j);
+    for(auto& it: jw) cin>>it;
+
+    for(int k = 0; k < jw.size(); k++){
+        int low = 0, high = n-1;
+        int mid, ans;
+        while(low <= high){
+
+            mid = (high + low) / 2;
+
+            if(jw[k] <= worms[mid] ){
+                ans = mid;
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+
+        cout<<ans+1<<endl;
+    }
+
 }
 
 int main() {

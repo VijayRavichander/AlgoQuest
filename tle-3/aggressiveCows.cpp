@@ -1,4 +1,4 @@
-// https://cses.fi/problemset/task/1085
+// https://codeforces.com/contest/474/problem/B
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -50,43 +50,49 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 
 
-bool f(vector<ll> nums, int k, ll mid){
-    ll divisions = 1;
-    ll sum = 0;
-    for(int i = 0; i < nums.size(); i++){
-        if(nums[i] > mid){
-            return false;
-        }else if(sum + nums[i] <= mid){
-            sum += nums[i];
-        }else{
-            sum = nums[i];
-            divisions++;
+
+bool possible(vector<ll>barns, ll mid, ll c){
+    ll prev = barns[0];
+    ll count = 1;
+
+    for(int i = 1; i < barns.size(); i++){
+        if(barns[i] - prev >= mid){
+            count++;
+            prev = barns[i];
+            if(count == c){
+                return true;
+            }
         }
     }
 
-    return divisions <= k;
+    return false;
 }
 
 void solve(){
-    ll n, k;
-    cin>>n>>k;
-    vector<ll> nums(n);
-    for(auto&it: nums) cin>>it;
-    
-    ll low = 0, high = 10e17;
-    ll mid, ans;
+   ll n, c;
+   cin>>n>>c;
+   vector<ll>barns(n);
+   for(auto&it: barns){
+    cin>>it;
+   }
+   sort(barns.begin(), barns.end());
+
+   ll low = 0, high = 1e10;
+   ll mid, ans;
+
     while(low <= high){
-        mid = (low + high) / 2;
-        if(f(nums, k, mid)){
+        mid = (high + low) / 2;
+
+        if(possible(barns, mid, c)){
             ans = mid;
-            high = mid - 1;
-        }else{
             low = mid + 1;
+        }else{
+            high = mid - 1;
         }
     }
 
     cout<<ans<<endl;
-    
+
 }
 
 int main() {
@@ -95,7 +101,7 @@ int main() {
 #endif
 
     int t = 1;
-    // cin>>t;
+    cin>>t;
     while(t--){
         solve();
     }
