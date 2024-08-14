@@ -5,6 +5,22 @@
         "iostream": "cpp",
         "__split_buffer": "cpp",
         "string": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "iomanip": "cpp",
+        "__bit_reference": "cpp",
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "initializer_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "string_view": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "filesystem": "cpp"
     }
 }
